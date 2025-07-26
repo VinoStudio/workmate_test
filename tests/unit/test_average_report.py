@@ -63,7 +63,10 @@ def test_average_report_with_none_response_time():
 
 
 def test_average_report_sorted_output():
-    """Тест сортировки результата по endpoint'ам"""
+    """
+    Test generating a report with sorted output
+    """
+
     logs = [
         LogEntry(datetime(2025, 6, 22, 10, 0), "/api/zebra", 100),
         LogEntry(datetime(2025, 6, 22, 10, 1), "/api/apple", 200),
@@ -73,6 +76,5 @@ def test_average_report_sorted_output():
     report = AverageResponseTimeReport()
     result = report.build(logs)
 
-    # Проверяем сортировку
     endpoints = [item["handler"] for item in result]
     assert endpoints == ["/api/banana", "/api/zebra", "/api/apple"]

@@ -1,5 +1,4 @@
 import pytest
-import os
 
 from tests import parametrize_data as test_data
 from core.log_reader import LogFileReader

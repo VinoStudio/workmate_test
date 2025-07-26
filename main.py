@@ -16,20 +16,21 @@ async def main():
         parser = create_parser(report_builders)
         args = parser.parse_args()
 
+        # create log reader and read logs
         log_reader = LogFileReader()
         logs_generator = log_reader.read_files(files=args.file, file_path=FILE_PATH)
         logs = [log async for log in logs_generator]
 
-        # Обрабатываем логи
+        # create log processor to filter logs
         processor = LogProcessor()
         processed_logs = processor.process_logs(logs, args.date)
 
-        # Генерируем отчет
+        # build report
         report_class = report_builders.get_report(args.report)
         report = report_class()
         report_data = report.build(processed_logs)
 
-        # Выводим результат
+        # print report
         if report_data:
             print(tabulate(report_data, headers="keys", tablefmt="grid"))
         else:
