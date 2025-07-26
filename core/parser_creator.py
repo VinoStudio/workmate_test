@@ -4,6 +4,15 @@ from core.interfaces.report_manager import BaseReportManager
 
 
 def create_parser(registered_reports: BaseReportManager) -> argparse.ArgumentParser:
+    """
+    Create and return a command-line argument parser
+
+    Args:
+        registered_reports (BaseReportManager): An instance of the report manager class
+
+    Returns:
+        argparse.ArgumentParser: A command-line argument parser
+    """
     parser = argparse.ArgumentParser(description="Command-line log processor")
     parser.add_argument(
         "--file",
